@@ -7,14 +7,18 @@ const phoneDisplay = document.querySelector("#phoneDisplay");
 const orderForm = document.querySelector("#orderForm");
 const customerName = document.querySelector("#customerName");
 const productChoice = document.querySelector("#productChoice");
+const quantity = document.querySelector("#quantity");
 const pickupPoint = document.querySelector("#pickupPoint");
 
 function buildWhatsAppUrl() {
   const name = customerName.value.trim();
   const product = productChoice.value;
+  const orderQuantity = quantity.value;
   const pickup = pickupPoint.value;
   const greeting = name ? `Halo UMBIKLIK, saya ${name}.` : "Halo UMBIKLIK.";
-  const message = `${greeting} Saya ingin pesan ${product} dengan opsi ${pickup}.`;
+  const message =
+  `${greeting} Saya ingin memesan ${orderQuantity} ${product} ` +
+  `dengan opsi ${pickup}.`;
 
   return `https://wa.me/${whatsappConfig.number}?text=${encodeURIComponent(message)}`;
 }
@@ -24,5 +28,5 @@ phoneDisplay.href = `https://wa.me/${whatsappConfig.number}`;
 
 orderForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  window.open(buildWhatsAppUrl(), "_blank", "noopener");
+  window.open(buildWhatsAppUrl(), "_blank", "noopener,noreferrer");
 });
